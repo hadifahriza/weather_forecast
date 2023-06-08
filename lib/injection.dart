@@ -10,7 +10,7 @@ final getIt = GetIt.instance;
 
 void init() {
   // bloc
-  getIt.registerFactory(() => WeatherBloc());
+  getIt.registerFactory(() => WeatherBloc(getIt()));
 
   // usecase
   getIt.registerLazySingleton(() => GetGeneralWeatherUsecase(getIt()));
