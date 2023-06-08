@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:weather_forecast/core/error/failure.dart';
 import 'package:weather_forecast/domain/entities/general_weather.dart';
+import 'package:weather_forecast/domain/entities/position.dart';
+import 'package:weather_forecast/domain/usecases/get_city_position_usecase.dart';
 import 'package:weather_forecast/domain/usecases/get_general_weather_usecase.dart';
 
 part 'weather_event.dart';
@@ -11,28 +13,45 @@ part 'weather_state.dart';
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   // Usecase
   final GetGeneralWeatherUsecase _getGeneralWeatherUsecase;
+  final GetCityPositionUsecase _getCityPositionUsecase;
 
-  WeatherBloc(this._getGeneralWeatherUsecase) : super(const WeatherState()) {
+  WeatherBloc(
+    this._getGeneralWeatherUsecase,
+    this._getCityPositionUsecase,
+  ) : super(const WeatherState()) {
     on<GetWeather>(_getGeneralWeatherByCity);
   }
 
   void _getGeneralWeatherByCity(GetWeather event, Emitter<WeatherState> emit) async {
     emit(state.copyWith(status: WeatherStatus.loading));
 
-    Either<Failure, GeneralWeather> result = await _getGeneralWeatherUsecase.call(GetGeneralWeatherParams(city: event.city));
+    Either<Failure, Position> position = await _getCityPositionUsecase.call(GetCityPositionParams(city: event.city));
 
-    result.fold(
-      (l) {
-        emit(state.copyWith(
-          status: WeatherStatus.error,
-        ));
+    await position.fold(
+      (l) async {
+        _emitError(emit);
       },
-      (r) {
-        emit(state.copyWith(
-          status: WeatherStatus.success,
-          generalWeather: r,
-        ));
+      (r) async {
+        Either<Failure, GeneralWeather> result = await _getGeneralWeatherUsecase.call(GetGeneralWeatherParams(position: r));
+
+        await result.fold(
+          (l) async {
+            _emitError(emit);
+          },
+          (r) async {
+            emit(state.copyWith(
+              status: WeatherStatus.success,
+              generalWeather: r,
+            ));
+          },
+        );
       },
     );
+  }
+
+  void _emitError(Emitter<WeatherState> emit) {
+    emit(state.copyWith(
+      status: WeatherStatus.error,
+    ));
   }
 }

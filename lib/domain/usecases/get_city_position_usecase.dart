@@ -6,18 +6,17 @@ import 'package:weather_forecast/core/constants/message_constants.dart';
 import 'package:weather_forecast/core/error/exceptions.dart';
 import 'package:weather_forecast/core/error/failure.dart';
 import 'package:weather_forecast/core/usecase/usecase.dart';
-import 'package:weather_forecast/domain/entities/general_weather.dart';
 import 'package:weather_forecast/domain/entities/position.dart';
 import 'package:weather_forecast/domain/repositories/weather_repository.dart';
 
-class GetGeneralWeatherUsecase extends UseCase<GeneralWeather, GetGeneralWeatherParams> {
+class GetCityPositionUsecase extends UseCase<Position, GetCityPositionParams> {
   final WeatherRepository repository;
-  GetGeneralWeatherUsecase(this.repository);
+  GetCityPositionUsecase(this.repository);
 
   @override
-  Future<Either<Failure, GeneralWeather>> call(GetGeneralWeatherParams params) async {
+  Future<Either<Failure, Position>> call(GetCityPositionParams params) async {
     try {
-      final result = await repository.getGeneralWeather(params);
+      final result = await repository.getCityPosition(params);
       return Right(result);
     } on ServerExceptions catch (e) {
       return Left(ServerFailure(e.message));
@@ -29,15 +28,15 @@ class GetGeneralWeatherUsecase extends UseCase<GeneralWeather, GetGeneralWeather
   }
 }
 
-class GetGeneralWeatherParams extends Equatable {
-  final Position position;
+class GetCityPositionParams extends Equatable {
+  final String city;
 
-  const GetGeneralWeatherParams({
-    required this.position,
+  const GetCityPositionParams({
+    required this.city,
   });
 
   @override
   List<Object?> get props => [
-        position,
+        city,
       ];
 }

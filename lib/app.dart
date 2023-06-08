@@ -5,6 +5,7 @@ import 'package:weather_forecast/core/constants/app_constants.dart';
 import 'package:weather_forecast/core/styles/color_style.dart';
 import 'package:weather_forecast/core/styles/text_style.dart';
 import 'package:weather_forecast/injection.dart';
+import 'package:weather_forecast/presentation/home_page.dart';
 
 // This widget is configuration accross apps
 
@@ -25,11 +26,7 @@ class MyApp extends StatelessWidget {
           textTheme: CustomTextStyle.textTheme,
           colorScheme: CustomColorStyle.lightColorScheme,
         ),
-        home: const Scaffold(
-          body: Center(
-            child: Text('Weather Forecast App'),
-          ),
-        ),
+        home: const HomePage(),
       ),
     );
   }
