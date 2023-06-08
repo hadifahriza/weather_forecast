@@ -4,9 +4,9 @@ import 'package:weather_forecast/presentation/home/home_page.dart';
 
 void main() {
   testWidgets('Search test', (WidgetTester tester) async {
-    final textFieldFinder = find.byWidget(TextField());
+    final textFieldFinder = find.byWidget(const TextField());
 
-    await tester.pumpWidget(MaterialApp(home: HomePage()));
+    await tester.pumpWidget(const MaterialApp(home: HomePage()));
     await tester.enterText(textFieldFinder, 'Jakarta');
     await tester.pump();
 
