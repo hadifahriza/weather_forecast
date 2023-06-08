@@ -6,5 +6,5 @@ import 'package:weather_forecast/injection.dart' as di;
 void main() async {
   di.init();
   await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  runApp(MyApp());
 }

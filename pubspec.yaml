@@ -24,6 +24,8 @@ dependencies:
   intl: ^0.18.1
 
 dev_dependencies:
+  auto_route_generator: ^7.1.1
+  build_runner: ^2.4.5
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
