@@ -9,7 +9,7 @@ void showToast(String message, ToastType? type) {
       case ToastType.error:
         return Colors.red;
       default:
-        return Colors.white;
+        return Colors.black;
     }
   }
 
