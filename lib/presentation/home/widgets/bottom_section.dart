@@ -77,6 +77,10 @@ class BottomSection extends StatelessWidget {
             ),
             controller: cityController,
             style: Theme.of(context).textTheme.bodyLarge,
+            onEditingComplete: () {
+              onSearch!();
+              FocusScope.of(context).unfocus();
+            },
           ),
           const SizedBox(height: ConstantStyle.height20),
           MaterialButton(
