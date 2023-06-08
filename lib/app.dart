@@ -5,7 +5,7 @@ import 'package:weather_forecast/core/constants/app_constants.dart';
 import 'package:weather_forecast/core/styles/color_style.dart';
 import 'package:weather_forecast/core/styles/text_style.dart';
 import 'package:weather_forecast/injection.dart';
-import 'package:weather_forecast/presentation/home_page.dart';
+import 'package:weather_forecast/presentation/home/home_page.dart';
 
 // This widget is configuration accross apps
 
