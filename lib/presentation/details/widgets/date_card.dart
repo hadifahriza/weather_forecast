@@ -47,13 +47,13 @@ class DateCard extends StatelessWidget {
                   ),
             ),
             Text(
-              TempConverter.kelvinToCelcius(data?.temp?.max ?? 0),
+              TempConverter.kelvinToCelcius(data?.temp?.max ?? 273.15),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: isSelected ? Theme.of(context).colorScheme.onBackground : Theme.of(context).colorScheme.onPrimary,
                   ),
             ),
             Text(
-              TempConverter.kelvinToCelcius(data?.temp?.min ?? 0),
+              TempConverter.kelvinToCelcius(data?.temp?.min ?? 273.15),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: isSelected ? Theme.of(context).colorScheme.onBackground : Theme.of(context).colorScheme.onPrimary,
                   ),

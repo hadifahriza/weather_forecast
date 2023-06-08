@@ -39,14 +39,14 @@ class WeatherCard extends StatelessWidget {
                   )
                 : const CircularProgressIndicator(),
             Text(
-              TempConverter.kelvinToCelcius(data?.temp?.day ?? 0),
+              TempConverter.kelvinToCelcius(data?.temp?.day ?? 273.15),
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                     fontWeight: FontWeight.bold,
                   ),
             ),
             Text(
-              'Feels Like ${TempConverter.kelvinToCelcius(data?.feelsLike?.day ?? 0)}',
+              'Feels Like ${TempConverter.kelvinToCelcius(data?.feelsLike?.day ?? 273.15)}',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),

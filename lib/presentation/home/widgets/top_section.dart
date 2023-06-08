@@ -55,13 +55,13 @@ class TopSection extends StatelessWidget {
           ],
         ),
         Text(
-          TempConverter.kelvinToCelcius(data?.current?.temp ?? 0),
+          TempConverter.kelvinToCelcius(data?.current?.temp ?? 273.15),
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
         ),
         Text(
-          'Feels Like ${TempConverter.kelvinToCelcius(data?.current?.feelslike ?? 0)}',
+          'Feels Like ${TempConverter.kelvinToCelcius(data?.current?.feelslike ?? 273.15)}',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
