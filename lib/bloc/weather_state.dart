@@ -1,10 +1,28 @@
 part of 'weather_bloc.dart';
 
-abstract class WeatherState extends Equatable {
-  const WeatherState();
-  
-  @override
-  List<Object> get props => [];
-}
+enum WeatherStatus { empty, loading, success, error }
 
-class WeatherInitial extends WeatherState {}
+class WeatherState extends Equatable {
+  final WeatherStatus status;
+  final GeneralWeather? generalWeather;
+
+  const WeatherState({
+    this.status = WeatherStatus.empty,
+    this.generalWeather,
+  });
+
+  @override
+  List<Object> get props => [
+        status,
+      ];
+
+  WeatherState copyWith({
+    WeatherStatus? status,
+    GeneralWeather? generalWeather,
+  }) {
+    return WeatherState(
+      status: status ?? this.status,
+      generalWeather: generalWeather ?? this.generalWeather,
+    );
+  }
+}
